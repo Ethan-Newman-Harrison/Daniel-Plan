@@ -25,7 +25,10 @@
   .header { background: #111; border-bottom: 1px solid var(--border); padding: 24px 20px 18px; position: sticky; top: 0; z-index: 100; }
   .header-label { font-size: 10px; letter-spacing: 4px; color: var(--gold); font-family: monospace; margin-bottom: 4px; }
   .header-title { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; margin-bottom: 2px; }
-  .header-sub { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+  .header-sub { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .header-weights { display: flex; gap: 20px; margin-bottom: 14px; }
+  .header-weight-item { font-size: 11px; color: var(--dim); font-family: monospace; }
+  .header-weight-item span { color: var(--text2); }
 
   .macro-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
   .macro-card { background: rgba(200,169,110,0.07); border: 1px solid rgba(200,169,110,0.15); border-radius: 8px; padding: 10px 4px; text-align: center; }
@@ -33,9 +36,9 @@
   .macro-label { font-size: 8px; color: var(--muted); letter-spacing: 1px; margin-top: 2px; font-family: monospace; }
   .macro-sub { font-size: 8px; color: var(--dim); margin-top: 1px; }
 
-  .tabs { display: flex; background: #0f0f0f; border-bottom: 1px solid var(--border); scrollbar-width: none; }
+  .tabs { display: flex; background: #0f0f0f; border-bottom: 1px solid var(--border); scrollbar-width: none; overflow-x: auto; }
   .tabs::-webkit-scrollbar { display: none; }
-  .tab-btn { flex: 1 1 0; padding: 13px 2px; border: none; border-bottom: 2px solid transparent; background: none; font-size: 10px; letter-spacing: 1px; font-family: monospace; cursor: pointer; color: var(--dim); white-space: nowrap; transition: color 0.2s; -webkit-tap-highlight-color: transparent; }
+  .tab-btn { flex: 0 0 auto; padding: 13px 12px; border: none; border-bottom: 2px solid transparent; background: none; font-size: 9px; letter-spacing: 1px; font-family: monospace; cursor: pointer; color: var(--dim); white-space: nowrap; transition: color 0.2s; -webkit-tap-highlight-color: transparent; }
   .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
 
   .tab-content { display: none; }
@@ -112,6 +115,17 @@
   .progression-rule-content { flex: 1; }
   .progression-rule-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
   .progression-rule-detail { font-size: 13px; color: #777; line-height: 1.65; }
+
+  .checkin-section { padding: 20px 16px; display: flex; flex-direction: column; gap: 16px; }
+  .checkin-block { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .checkin-block-header { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+  .checkin-block-title { font-size: 11px; letter-spacing: 2px; color: var(--gold); font-family: monospace; margin-bottom: 4px; }
+  .checkin-block-sub { font-size: 12px; color: var(--muted); }
+  .checkin-items { padding: 14px 20px; display: flex; flex-direction: column; gap: 10px; }
+  .checkin-item { display: flex; gap: 12px; align-items: flex-start; }
+  .checkin-item-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 6px; }
+  .checkin-item-text { font-size: 13px; color: var(--text2); line-height: 1.65; }
+  .checkin-item-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -120,6 +134,10 @@
   <div class="header-label">DANIEL'S TRAINING PROTOCOL</div>
   <div class="header-title">5-Day Upper/Lower Split</div>
   <div class="header-sub">Hypertrophy — Fat Loss · 12–16 Weeks</div>
+  <div class="header-weights">
+    <div class="header-weight-item">STARTING WEIGHT <span>207 lb</span></div>
+    <div class="header-weight-item">CURRENT WEIGHT <span>—</span></div>
+  </div>
   <div class="macro-grid">
     <div class="macro-card"><div class="macro-value">2,800</div><div class="macro-label">KCAL</div><div class="macro-sub">±50</div></div>
     <div class="macro-card"><div class="macro-value">215g</div><div class="macro-label">PRO</div><div class="macro-sub">±5g</div></div>
@@ -134,6 +152,7 @@
   <button class="tab-btn" onclick="switchTab('cardio', this)">CARDIO</button>
   <button class="tab-btn" onclick="switchTab('supplements', this)">SUPPLEMENTS</button>
   <button class="tab-btn" onclick="switchTab('notes', this)">NOTES</button>
+  <button class="tab-btn" onclick="switchTab('checkin', this)">CHECK-IN</button>
 </div>
 
 <div id="tab-program" class="tab-content active">
@@ -266,40 +285,32 @@
 
 <div id="tab-notes" class="tab-content">
   <div class="notes-section">
-
     <div class="notes-card">
       <div class="notes-card-title">WEIGH YOURSELF</div>
       <div class="notes-card-text">The scale fluctuates daily based on water, sodium, carbs, and sleep — daily readings mean nothing on their own. What matters is your 7-day rolling average. Weigh yourself every morning and look at the weekly trend, not the daily number.</div>
     </div>
-
     <div class="notes-card">
       <div class="notes-card-title">PROTEIN</div>
       <div class="notes-card-text">Protein is non-negotiable. On days where calories slip, carbs and fat can flex — protein cannot. Hitting your protein target is the single most important nutrition variable for keeping muscle while losing fat.</div>
     </div>
-
     <div class="notes-card">
       <div class="notes-card-title">INTENSITY</div>
       <div class="notes-card-text">Take every set to 0–3 reps in the tank. Being as close to failure as possible is what signals to your body that it NEEDS that muscle and will be key to preserving or even building muscle on a cut.</div>
     </div>
-
     <div class="notes-card">
       <div class="notes-card-title">STEPS</div>
       <div class="notes-card-text">Hit 8,000–12,000 steps every day. This is part of the program, not optional. Steps are your most consistent and lowest-cost tool for staying in a deficit — treadmill sessions count toward this total.</div>
     </div>
-
     <div class="notes-card">
       <div class="notes-card-title">SLEEP</div>
       <div class="notes-card-text">Aim for 7–9 hours every night. Recovery happens outside the gym — sleep is where muscle is built and fat is lost. Poor sleep raises cortisol, increases hunger, and tanks performance. Treat it like training.</div>
     </div>
-
     <div class="notes-card">
       <div class="notes-card-title">MISSED SESSIONS</div>
       <div class="notes-card-text">If you miss a session, don't try to cram it in or double up. Just pick up where you left off on the next day. Feel free to move sessions around your week as needed — the structure matters, the specific days don't. One missed session changes nothing — consistency over weeks and months is what matters.</div>
     </div>
-
     <div class="progression-block">
       <div class="progression-block-title">PROGRESSION RULES</div>
-
       <div class="progression-rule">
         <div class="progression-rule-num">1</div>
         <div class="progression-rule-content">
@@ -307,7 +318,6 @@
           <div class="progression-rule-detail">Log weight and reps for every working set. Be mindful of how you feel.</div>
         </div>
       </div>
-
       <div class="progression-rule">
         <div class="progression-rule-num">2</div>
         <div class="progression-rule-content">
@@ -315,7 +325,6 @@
           <div class="progression-rule-detail">When you hit the top of the rep range for all sets, add reps next session before adding weight.</div>
         </div>
       </div>
-
       <div class="progression-rule">
         <div class="progression-rule-num">3</div>
         <div class="progression-rule-content">
@@ -323,7 +332,6 @@
           <div class="progression-rule-detail">Once you consistently hit the top of the rep range, add 2.5–5lbs and reset to the bottom of the rep range.</div>
         </div>
       </div>
-
       <div class="progression-rule">
         <div class="progression-rule-num">4</div>
         <div class="progression-rule-content">
@@ -331,7 +339,6 @@
           <div class="progression-rule-detail">If strength stalls for 2+ consecutive weeks, drop weight 10% and rebuild. Don't grind the same numbers indefinitely.</div>
         </div>
       </div>
-
       <div class="progression-rule">
         <div class="progression-rule-num">5</div>
         <div class="progression-rule-content">
@@ -339,9 +346,84 @@
           <div class="progression-rule-detail">Reduce volume by ~40–50% and keep the same exercises and intensity. Performance rebound the following week is normal and expected.</div>
         </div>
       </div>
-
     </div>
+  </div>
+</div>
 
+<div id="tab-checkin" class="tab-content">
+  <div class="checkin-section">
+    <div class="checkin-block">
+      <div class="checkin-block-header">
+        <div class="checkin-block-title">WHAT I NEED FROM YOU EVERY WEEK</div>
+        <div class="checkin-block-sub">Send these every Saturday before our call</div>
+      </div>
+      <div class="checkin-items">
+        <div class="checkin-item">
+          <div class="checkin-item-dot"></div>
+          <div>
+            <div class="checkin-item-text">Saturday morning weigh-in</div>
+            <div class="checkin-item-sub">First thing in the morning, after using the bathroom, before eating or drinking anything</div>
+          </div>
+        </div>
+        <div class="checkin-item">
+          <div class="checkin-item-dot"></div>
+          <div>
+            <div class="checkin-item-text">Front, back and side photos</div>
+            <div class="checkin-item-sub">Underwear only, hamstrings and calves visible. Same angle, lighting and posture every single week — consistency matters more than the photos looking good</div>
+          </div>
+        </div>
+        <div class="checkin-item">
+          <div class="checkin-item-dot"></div>
+          <div>
+            <div class="checkin-item-text">Leg photos if needed</div>
+            <div class="checkin-item-sub">If you need separate photos to show hamstrings and calves clearly, take them — same consistency rules apply</div>
+          </div>
+        </div>
+        <div class="checkin-item">
+          <div class="checkin-item-dot"></div>
+          <div>
+            <div class="checkin-item-text">Photos of your training notebook</div>
+            <div class="checkin-item-sub">Every working set logged — exercise, weight used, reps completed. This is how we track progression week to week</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="checkin-block">
+      <div class="checkin-block-header">
+        <div class="checkin-block-title">THINGS TO KEEP IN MIND</div>
+        <div class="checkin-block-sub">We'll go through these together on our weekly call — no need to journal, just reflect</div>
+      </div>
+      <div class="checkin-items">
+        <div class="checkin-item">
+          <div class="checkin-item-dot"></div>
+          <div>
+            <div class="checkin-item-text">Energy, mood and sleep</div>
+            <div class="checkin-item-sub">How did you feel day to day this week? Were you tired, flat, or did you feel good going into sessions?</div>
+          </div>
+        </div>
+        <div class="checkin-item">
+          <div class="checkin-item-dot"></div>
+          <div>
+            <div class="checkin-item-text">Strength and performance feel</div>
+            <div class="checkin-item-sub">Did you feel stronger or weaker than last week? Were sessions hard, comfortable, or did something feel off?</div>
+          </div>
+        </div>
+        <div class="checkin-item">
+          <div class="checkin-item-dot"></div>
+          <div>
+            <div class="checkin-item-text">Nutrition adherence</div>
+            <div class="checkin-item-sub">Was hitting your targets easy or a struggle this week? Any days that went significantly off track?</div>
+          </div>
+        </div>
+        <div class="checkin-item">
+          <div class="checkin-item-dot"></div>
+          <div>
+            <div class="checkin-item-text">Pain or discomfort</div>
+            <div class="checkin-item-sub">Anything unusual around your hips, back or joints during or after training? Flag anything early — don't push through pain</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -354,16 +436,14 @@ const notes = {
   rearDelts: "Single arm. Envision a pile of cash in front of you and for whatever you touch you get to keep — push your pinky OUT and AWAY. Focus on getting a good mind muscle connection and squeezing at the top.",
   lateralRaise: "Set the cable to where your hand naturally rests. Lean slightly forward, focus on pushing your knuckles out and away.",
   abCrunch: "Keep your core braced. Round the spine into the crunch — don't pull with the neck or hip flex.",
-  hackSquat: "Primary quad compound. Full depth, controlled eccentric. Feet shoulder width.",
-  rdl: "Hip hinge pattern. Feel the hamstring stretch at the bottom — don't go so low that the lower back rounds. Soft knee bend throughout.",
+  bulgarianSplitSquat: "Unilateral quad and glute work. Rear foot elevated, front foot far enough forward that the knee stays over the foot. Be consistent with your foot position and depth session to session for clean progressive overload tracking.",
+  loadedHyperextension: "Load this heavy — treat it like a compound. Squeeze the glutes hard at the top. Don't hyperextend the lower back.",
   legExtension: "Quad isolation. Full extension at the top, controlled descent.",
   seatedLegCurl: "Set the foot pad as far as comfortable for a longer lever arm. Remember to lean forward and to bring the seat to where it will touch your lower back so your hips cannot move. Go for a good deep stretch.",
   hipAdductor: "Inner thigh isolation. Important for hip stability given injury history. Keep feet all the way down, keep your chest high and your back against the seat, focusing on bringing your knees together and getting your hips to do all the work.",
   calfPress: "Hits the gastrocnemius. Full stretch at the bottom — don't bounce. Full contraction at the top.",
-  hangingLegRaise: "Lower ab emphasis. Bodyweight — go to failure. Control the descent, don't swing.",
-  loadedHyperextension: "Load this heavy — treat it like a compound. Squeeze the glutes hard at the top.",
-  bulgarianSplitSquat: "Unilateral quad and glute work. Rear foot elevated, front foot far enough forward that the knee stays over the foot.",
   seatedCalfRaise: "Hits the soleus — different muscle to the calf press on Lower A. Full stretch at the bottom, full contraction at the top.",
+  hangingLegRaise: "Lower ab emphasis. Bodyweight — go to failure. Control the descent, don't swing.",
   plank: "Core stability finisher. Hold until you genuinely can't maintain form. Hips level, don't let the lower back sag.",
   rotaryTorso: "Oblique work. Core is warmed up from all the pressing and pulling. Slow and deliberate each direction, no momentum.",
   dbBicepCurl: "Seated or standing is fine, don't swing — controlled throughout.",
@@ -384,8 +464,8 @@ const data = {
       { name: "Ab Crunch Machine", sets: 3, reps: "8–12 reps", notes: notes.abCrunch },
     ],
     LA: [
-      { name: "Hack Squat", sets: 4, reps: "6–10 reps", notes: notes.hackSquat },
-      { name: "RDL", sets: 3, reps: "8–12 reps", notes: notes.rdl },
+      { name: "Bulgarian Split Squat", sets: 4, reps: "8–12 reps", notes: notes.bulgarianSplitSquat },
+      { name: "Loaded Hyperextension", sets: 4, reps: "6–10 reps", notes: notes.loadedHyperextension },
       { name: "Leg Extension Machine", sets: 3, reps: "8–12 reps", notes: notes.legExtension },
       { name: "Seated Leg Curl Machine", sets: 3, reps: "8–12 reps", notes: notes.seatedLegCurl },
       { name: "Hip Adductor Machine", sets: 3, reps: "10–15 reps", notes: notes.hipAdductor },
@@ -403,7 +483,7 @@ const data = {
     ],
     LB: [
       { name: "Loaded Hyperextension", sets: 4, reps: "6–10 reps", notes: notes.loadedHyperextension },
-      { name: "Bulgarian Split Squat", sets: 3, reps: "8–12 reps", notes: notes.bulgarianSplitSquat },
+      { name: "Bulgarian Split Squat", sets: 4, reps: "8–12 reps", notes: notes.bulgarianSplitSquat },
       { name: "Seated Leg Curl Machine", sets: 3, reps: "8–12 reps", notes: notes.seatedLegCurl },
       { name: "Leg Extension Machine", sets: 3, reps: "8–12 reps", notes: notes.legExtension },
       { name: "Hip Adductor Machine", sets: 3, reps: "10–15 reps", notes: notes.hipAdductor },
@@ -426,6 +506,7 @@ const data = {
     { name: "Omega-3 Fish Oil", dose: "2–3g EPA/DHA", timing: "With a meal", tier: 1, note: "Anti-inflammatory, supports joint health, reduces muscle soreness. More valuable on a cut when recovery is impaired." },
     { name: "KSM-66 Ashwagandha", dose: "300–600mg", timing: "With food", tier: 1, note: "Reduces cortisol and supports testosterone — both directly relevant on a cut. Already in your stack." },
     { name: "Magnesium Glycinate", dose: "300mg", timing: "Before bed", tier: 2, note: "Improves sleep depth and recovery. Commonly depleted through sweat. Glycinate form for best absorption." },
+    { name: "Casein Protein", dose: "30–40g", timing: "30–60 min before bed", tier: 2, note: "Slow digesting protein that releases amino acids over 5–7 hours overnight — reduces muscle breakdown during the longest fast of your day. Particularly useful on a cut. Cottage cheese is an excellent whole food alternative if you don't want a separate powder." },
     { name: "Multivitamin", dose: "As directed", timing: "With a meal", tier: 2, note: "Insurance policy for micronutrient gaps on a caloric deficit. Covers zinc and other commonly depleted nutrients." },
     { name: "Whey Protein", dose: "As needed", timing: "Any time", tier: 3, note: "A convenient food source for hitting your daily protein target — not a special supplement. Whole food protein sources are equally good. Use it to fill gaps when hitting 215g from food alone is impractical." },
     { name: "Pre-Workout", dose: "As directed", timing: "30–45 min before training", tier: 3, note: "If you use one, it's fine. The useful ingredients are caffeine and citrulline — avoid pre-workouts with large proprietary blends of unproven compounds. Avoid within 6–8 hours of sleep even if it doesn't feel like it's keeping you awake." },
