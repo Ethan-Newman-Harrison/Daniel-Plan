@@ -136,13 +136,13 @@
   <div class="header-sub">Hypertrophy — Fat Loss · 12–16 Weeks</div>
   <div class="header-weights">
     <div class="header-weight-item">STARTING WEIGHT <span>207 lb</span></div>
-    <div class="header-weight-item">CURRENT WEIGHT <span>206.4 lb</span></div>
+    <div class="header-weight-item">CURRENT WEIGHT <span>206 lb</span></div>
   </div>
   <div class="macro-grid">
-    <div class="macro-card"><div class="macro-value">2,700</div><div class="macro-label">KCAL</div><div class="macro-sub">±50</div></div>
-    <div class="macro-card"><div class="macro-value">215g</div><div class="macro-label">PRO</div><div class="macro-sub">±5g</div></div>
-    <div class="macro-card"><div class="macro-value">231g</div><div class="macro-label">CARB</div><div class="macro-sub">±20g</div></div>
-    <div class="macro-card"><div class="macro-value">78g</div><div class="macro-label">FAT</div><div class="macro-sub">±5g</div></div>
+    <div class="macro-card"><div class="macro-value">2,650</div><div class="macro-label">KCAL</div><div class="macro-sub">±50</div></div>
+    <div class="macro-card"><div class="macro-value">210g</div><div class="macro-label">PRO</div><div class="macro-sub">±5g</div></div>
+    <div class="macro-card"><div class="macro-value">287g</div><div class="macro-label">CARB</div><div class="macro-sub">±20g</div></div>
+    <div class="macro-card"><div class="macro-value">74g</div><div class="macro-label">FAT</div><div class="macro-sub">±5g</div></div>
   </div>
 </div>
 
@@ -430,7 +430,7 @@
 <script>
 const notes = {
   inclineDB: "Primary chest compound. Go heavy, control the weight, keep your elbows forward.",
-  pullUps: "Primary vertical pull. Full stretch at the bottom, drive elbows down and back. Engage the core throughout — keep it braced.",
+  latPulldown: "D-handle attachment. Keep your elbows forward throughout — this shifts the work onto the lats and out of the biceps. Full stretch at the top, drive elbows down and back. Focus on feeling the lats, not your arms.",
   pecFly: "Set the seat high and place your hands low — this should feel like a bit of a high to low fly movement. Get a good stretch, focus on squeezing at the top.",
   machineRow: "Primary horizontal pull. Set the seat low, underhand grip. Keep your back upright and don't let your back round for a better stretch. Pull with your elbows and let the stretch come from your chest being kept high and your elbows being pulled forward. Focus on squeezing at the top.",
   rearDelts: "Single arm. Envision a pile of cash in front of you and for whatever you touch you get to keep — push your pinky OUT and AWAY. Focus on getting a good mind muscle connection and squeezing at the top.",
@@ -456,9 +456,9 @@ const data = {
   exercises: {
     UA: [
       { name: "Incline DB Press", sets: 4, reps: "6–10 reps", notes: notes.inclineDB },
-      { name: "Pull-Ups", sets: 3, reps: "To failure", notes: notes.pullUps },
-      { name: "Pec Fly Machine", sets: 3, reps: "8–12 reps", notes: notes.pecFly },
       { name: "Machine Row", sets: 3, reps: "6–10 reps", notes: notes.machineRow },
+      { name: "Pec Fly Machine", sets: 3, reps: "8–12 reps", notes: notes.pecFly },
+      { name: "Lat Pulldown", sets: 3, reps: "6–10 reps", notes: notes.latPulldown },
       { name: "Rear Delts on Pec Deck Machine", sets: 4, reps: "8–12 reps", notes: notes.rearDelts },
       { name: "Cable Lateral Raise", sets: 3, reps: "8–12 reps", notes: notes.lateralRaise },
       { name: "Ab Crunch Machine", sets: 3, reps: "8–12 reps", notes: notes.abCrunch },
@@ -474,9 +474,9 @@ const data = {
     ],
     UB: [
       { name: "Incline DB Press", sets: 4, reps: "6–10 reps", notes: notes.inclineDB },
-      { name: "Pull-Ups", sets: 3, reps: "To failure", notes: notes.pullUps },
-      { name: "Pec Fly Machine", sets: 3, reps: "8–12 reps", notes: notes.pecFly },
       { name: "Machine Row", sets: 3, reps: "6–10 reps", notes: notes.machineRow },
+      { name: "Pec Fly Machine", sets: 3, reps: "8–12 reps", notes: notes.pecFly },
+      { name: "Lat Pulldown", sets: 3, reps: "6–10 reps", notes: notes.latPulldown },
       { name: "Rear Delts on Pec Deck Machine", sets: 4, reps: "8–12 reps", notes: notes.rearDelts },
       { name: "Cable Lateral Raise", sets: 3, reps: "8–12 reps", notes: notes.lateralRaise },
       { name: "Rotary Torso Machine", sets: 3, reps: "8–12 reps", notes: notes.rotaryTorso },
@@ -508,7 +508,7 @@ const data = {
     { name: "Magnesium Glycinate", dose: "300mg", timing: "Before bed", tier: 2, note: "Improves sleep depth and recovery. Commonly depleted through sweat. Glycinate form for best absorption." },
     { name: "Casein Protein", dose: "30–40g", timing: "30–60 min before bed", tier: 2, note: "Slow digesting protein that releases amino acids over 5–7 hours overnight — reduces muscle breakdown during the longest fast of your day. Particularly useful on a cut. Cottage cheese is an excellent whole food alternative if you don't want a separate powder." },
     { name: "Multivitamin", dose: "As directed", timing: "With a meal", tier: 2, note: "Insurance policy for micronutrient gaps on a caloric deficit. Covers zinc and other commonly depleted nutrients." },
-    { name: "Whey Protein", dose: "As needed", timing: "Any time", tier: 3, note: "A convenient food source for hitting your daily protein target — not a special supplement. Whole food protein sources are equally good. Use it to fill gaps when hitting 215g from food alone is impractical." },
+    { name: "Whey Protein", dose: "As needed", timing: "Any time", tier: 3, note: "A convenient food source for hitting your daily protein target — not a special supplement. Whole food protein sources are equally good. Use it to fill gaps when hitting 210g from food alone is impractical." },
     { name: "Pre-Workout", dose: "As directed", timing: "30–45 min before training", tier: 3, note: "If you use one, it's fine. The useful ingredients are caffeine and citrulline — avoid pre-workouts with large proprietary blends of unproven compounds. Avoid within 6–8 hours of sleep even if it doesn't feel like it's keeping you awake." },
     { name: "Collagen Protein", dose: "10–15g daily", timing: "Any time", tier: 3, note: "Good for connective tissue health and injury prevention and recovery. Particularly relevant given your hip injury history — a long term investment in keeping your joints healthy and resilient." },
   ],
